@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.2",
   "scripts": {
+    "allie": "npx ts-node src/cli/_allieWork.ts",
     "deploy:env": "npm run prebuild && sls deploy --stage $NODE_ENV",
     "deploy:dev": "export NODE_ENV=dev && npm run deploy:env",
     "deploy:prod": "export NODE_OPTIONS=--max-old-space-size=6144 && export NODE_ENV=prod && npm run deploy:env",
@@ -87,6 +88,7 @@
     "pg-promise": "^11.4.0",
     "postgres": "^3.3.1",
     "promise.allsettled": "^1.0.5",
+    "protobufjs": "^7.2.5",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.33.0",
     "typeorm": "^0.3.11"
