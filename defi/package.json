@@ -42,6 +42,8 @@
   "devDependencies": {
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-typescript": "^7.17.12",
+    "@bufbuild/buf": "^1.28.0",
+    "@bufbuild/protoc-gen-es": "^1.4.2",
     "@types/aws-lambda": "^8.10.97",
     "@types/inquirer-autocomplete-prompt": "^2.0.0",
     "@types/jest": "^27.5.1",
@@ -72,10 +74,12 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.245.0",
+    "@bufbuild/protobuf": "^1.4.2",
     "@defillama/adapters": "file:./DefiLlama-Adapters",
     "@defillama/dimension-adapters": "file:./dimension-adapters",
     "@defillama/emissions-adapters": "file:./emissions-adapters",
     "@defillama/sdk": "^4.0.46",
+    "@nakji-network/connectorts": "github:beach-dev/connectorts",
     "@supercharge/promise-pool": "^2.3.2",
     "axios": "^0.27.2",
     "bignumber.js": "^9.0.1",

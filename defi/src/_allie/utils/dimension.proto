@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+message DimensionRecord {
+    message DimensionKey {
+        string protocolId = 1;
+        string adaptorType = 2;
+        string version = 3;
+        int64 timestamp = 4;
+    }
+
+    message DimensionData {
+        message Dimension {
+            map<string, double> data = 1;
+        }
+
+        map<string, Dimension> data = 1;
+    }
+
+    DimensionKey key = 1;
+    DimensionData data = 2;
+}

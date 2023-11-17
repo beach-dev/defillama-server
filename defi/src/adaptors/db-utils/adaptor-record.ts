@@ -6,7 +6,6 @@ import { Item } from "./base"
 import { ProtocolType } from "@defillama/dimension-adapters/adapters/types"
 import { IJSON } from "../data/types"
 import dynamoReservedKeywords from "./dynamo-reserved-keywords"
-import { exportToProtobuf } from "./protobuf-utils"
 
 export enum AdaptorRecordType {
     dailyVolume = "dv",
@@ -178,8 +177,12 @@ export const storeAdaptorRecord = async (adaptorRecord: AdaptorRecord, eventTime
 
 
     try {
-        console.log("Storing", obj2Store, adaptorRecord.keys())
-        exportToProtobuf(obj2Store, adaptorRecord.keys().PK, adaptorRecord.keys().SK)
+        console.log("Storing", obj2StoreRemoveReserveKeys, adaptorRecord.keys())
+        await dynamodb.update({
+            Key: adaptorRecord.keys(),
+            UpdateExpression: createUpdateExpressionFromObj(obj2StoreRemoveReserveKeys),
+            ExpressionAttributeValues: createExpressionAttributeValuesFromObj(obj2StoreRemoveReserveKeys)
+        }) // Upsert like
         return adaptorRecord
     } catch (error) {
         throw error

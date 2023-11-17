@@ -22,3 +22,4 @@ src/emissions/utils/*.png
 src/dexVolumes/cli/backfillUtilities/output
 src/adaptors/cli/*/output
 src/api2/metadata.json
+protobuf_output
