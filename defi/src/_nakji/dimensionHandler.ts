@@ -13,13 +13,11 @@ import { MsgType } from "@nakji-network/connectorts/dist/kafkautils/src/types";
 import * as chain from "./utils/gen/dimension_pb"
 import * as protobuf from "@bufbuild/protobuf"
 
-const CURRENT_TIMESTAMP = Math.trunc((Date.now()) / 1000)
-
-async function run(adaptorType: AdapterType) {
+export const dimensionHandler = async (adaptorType: AdapterType, timestamp: number) => {
   const connector = Connector.create()
   connector.registerProtos('./utils/dimension.proto', MsgType.BF, new chain.DimensionRecord({}))
   // Timestamp to query, defaults current timestamp - 2 minutes delay
-  const currentTimestamp = CURRENT_TIMESTAMP;
+  const currentTimestamp = timestamp;
   // Get clean day
   const cleanCurrentDayTimestamp = getTimestampAtStartOfDayUTC(currentTimestamp)
   const cleanPreviousDayTimestamp = getTimestampAtStartOfDayUTC(cleanCurrentDayTimestamp - 1)
@@ -80,7 +78,7 @@ async function run(adaptorType: AdapterType) {
         const dimensionRecords: protobuf.Message[] = []
         for (const [version, adapter] of adaptersToRun) {
           const runAtCurrTime = Object.values(adapter).some(a => a.runAtCurrTime)
-          if (runAtCurrTime && Math.abs(CURRENT_TIMESTAMP - cleanCurrentDayTimestamp) > 60 * 60 * 2) continue
+          if (runAtCurrTime && Math.abs(timestamp - cleanCurrentDayTimestamp) > 60 * 60 * 2) continue
           
           const runAdapterRes = await runAdapter(adapter, cleanCurrentDayTimestamp, chainBlocks, module, version)
 
@@ -119,8 +117,3 @@ async function run(adaptorType: AdapterType) {
     }
   }))
 };
-
-
-const adapter_type = process.argv[2] ? process.argv[2] as AdapterType : AdapterType.PROTOCOLS;
-
-run(adapter_type)
