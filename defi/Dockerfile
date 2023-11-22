@@ -15,5 +15,8 @@ RUN npm install -g ts-node
 # Copy the rest of the project files
 COPY . .
 
+# Prebuild 
+RUN ts-node src/cli/buildRequires.ts
+
 # Specify the command to run your Node.js application
 ENTRYPOINT ["tail", "-f", "/dev/null"]

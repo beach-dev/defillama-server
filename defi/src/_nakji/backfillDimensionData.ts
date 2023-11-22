@@ -8,8 +8,11 @@ const adapter_type = process.argv[2] ? process.argv[2] as AdapterType : AdapterT
 const startDate = process.argv[3] ? new Date(process.argv[3]) : new Date()
 const endDate = process.argv[4] ? new Date(process.argv[4]) : new Date()
 
-let dayInMilis = startDate.getTime()
-while (dayInMilis <= endDate.getTime()) {
-  dimensionHandler(adapter_type, dayInMilis / 1000)
-  dayInMilis += DAY_IN_MILISECONDS
+const main = async () => {
+  let dayInMilis = startDate.getTime()
+  while (dayInMilis <= endDate.getTime()) {
+    await dimensionHandler(adapter_type, dayInMilis / 1000)
+    dayInMilis += DAY_IN_MILISECONDS
+  }
 }
+main()
