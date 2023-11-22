@@ -1,11 +1,11 @@
 require("dotenv").config();
 
-import { getProtocol, } from "../cli/utils";
-import { storeTvl } from "../storeTvlInterval/getAndStoreTvl";
-import { importAdapter } from "../cli/utils/importAdapter";
+import { getProtocol, } from "../../cli/utils";
+import { storeTvl } from "../../storeTvlInterval/getAndStoreTvl";
+import { importAdapter } from "../../cli/utils/importAdapter";
 import { util } from "@defillama/sdk";
 
-import protocols from "../protocols/data";
+import protocols from "../../protocols/data";
 
 const { humanizeNumber: { humanizeNumber} } = util
 

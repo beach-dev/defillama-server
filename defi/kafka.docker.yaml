@@ -1,0 +1,8 @@
+log:
+  level: debug
+  format: console
+kafka:
+  url: localhost:9092
+  env: dev # set it to dev if you would like to disable protoregistry
+protoregistry:
+    host: localhost:9191

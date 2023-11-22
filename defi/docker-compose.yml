@@ -1,11 +1,10 @@
-version: '3.8'
+version: '3'
+
 services:
-  dynamodb-local:
-    command: "-jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data"
-    image: "amazon/dynamodb-local:latest"
-    container_name: dynamodb-local
-    ports:
-      - "8000:8000"
+  defillama-exporter:
+    image: defillama-exporter
     volumes:
-      - "./docker/dynamodb:/home/dynamodblocal/data"
-    working_dir: /home/dynamodblocal
+      - "./kafka.docker.yaml:/root/kafka.docker.yaml"
+    env_file:
+      - ./.docker.env
+    network_mode: "host"

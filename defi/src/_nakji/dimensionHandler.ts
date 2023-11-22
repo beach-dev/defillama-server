@@ -24,7 +24,8 @@ export const dimensionHandler = async (adaptorType: AdapterType, timestamp: numb
 
   // Import data list to be used
   const dataModule = await loadAdaptorsData(adaptorType)
-  const adaptorsList = dataModule.default.filter((adaptor) => adaptor.name == 'Uniswap V3')
+  // const adaptorsList = dataModule.default.filter((adaptor) => adaptor.name == 'Uniswap V3')
+  const adaptorsList = dataModule.default
   console.log(adaptorsList)
   // Import some utils
   const { importModule, KEYS_TO_STORE, config } = dataModule
